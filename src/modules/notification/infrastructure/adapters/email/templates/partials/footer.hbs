@@ -1,0 +1,61 @@
+<tr>
+    <td align='center' bgcolor='#e9ecef' style='padding: 24px;'>
+        <!--[if (gte mso 9)|(IE)]>
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+    <tr>
+    <td align="center" valign="top" width="600">
+    <![endif]-->
+        <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 600px;'>
+
+            <!-- start permission -->
+            {{#if typeOfAction}}
+                <tr>
+                    <td
+                        align='center'
+                        bgcolor='#e9ecef'
+                        style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;"
+                    >
+                        <p style='margin: 0;'>You received this email because we received a request for
+                            {{typeOfAction}}
+                            for your account. If you didn't request this action, contact us immediately via
+                            support@TypeScript-Nestjs-Clean-Architecture.</p>
+                    </td>
+                </tr>
+            {{/if}}
+
+            <!-- end permission -->
+
+            <!-- start unsubscribe -->
+            <tr>
+                <td
+                    align='center'
+                    bgcolor='#e9ecef'
+                    style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;"
+                >
+                    <p style='margin: 0;'>To stop receiving these emails, you can
+                        <a href='https://sendgrid.com' target='_blank' rel='noopener noreferrer'>unsubscribe</a>
+                        at any time.</p>
+                </td>
+            </tr>
+            <!-- end unsubscribe -->
+
+            <!-- start address -->
+            <tr>
+                <td
+                    align='center'
+                    bgcolor='#e9ecef'
+                    style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;"
+                >
+                    <p style='margin: 0;'>Paste 1234 S. Broadway St. City, State 12345</p>
+                </td>
+            </tr>
+            <!-- end address -->
+
+        </table>
+        <!--[if (gte mso 9)|(IE)]>
+    </td>
+    </tr>
+    </table>
+    <![endif]-->
+    </td>
+</tr>

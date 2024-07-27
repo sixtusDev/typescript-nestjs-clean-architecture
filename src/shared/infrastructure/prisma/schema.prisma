@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RoleNames {
+  USER
+  ADMIN
+  MODERATOR
+  CONTENT_CREATOR
+}
+
+model User {
+  id              String    @id @default(uuid())
+  email           String    @unique
+  firstName       String
+  lastName        String
+  username        String    @unique
+  password        String
+  isEmailVerified Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  createdBy       String?
+  updatedAt       DateTime? @updatedAt
+  updatedBy       String?
+  deletedAt       DateTime? @default(now())
+  deletedBy       String?
+
+  profile   UserProfile?
+  userRoles UserRole[]
+}
+
+model UserProfile {
+  id                     String     @id @default(uuid())
+  userId                 String     @unique
+  bio                    String?
+  profilePictureUrl      String?
+  learningStreak         Int        @default(0)
+  xpPoints               Int        @default(0)
+  preferredLearningTimes DateTime[] @default([])
+  lastActiveAt           DateTime   @default(now())
+  dateOfBirth            DateTime?
+  createdAt              DateTime   @default(now())
+  createdBy              String?
+  updatedAt              DateTime?  @updatedAt
+  updatedBy              String?
+  deletedAt              DateTime?  @default(now())
+  deletedBy              String?
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Role {
+  id          String    @id @default(uuid())
+  name        RoleNames @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  createdBy   String?
+  updatedAt   DateTime? @updatedAt
+  updatedBy   String?
+  deletedAt   DateTime? @default(now())
+  deletedBy   String?
+
+  userRoles UserRole[]
+}
+
+model UserRole {
+  id        String    @id @default(uuid())
+  userId    String    @unique
+  roleId    String
+  createdAt DateTime  @default(now())
+  createdBy String?
+  updatedAt DateTime? @updatedAt
+  updatedBy String?
+  deletedAt DateTime? @default(now())
+  deletedBy String?
+
+  user User @relation(fields: [userId], references: [id])
+  role Role @relation(fields: [roleId], references: [id])
+}

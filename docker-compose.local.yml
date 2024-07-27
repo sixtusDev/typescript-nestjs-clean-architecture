@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+    postgres_local:
+        image: postgres:15-alpine
+        env_file:
+            - env/local.pg.env
+        ports:
+            - 5432:5432
+        volumes:
+            - pg_data_local:/var/lib/postgresql/data
+        networks:
+            - typescript_nestjs_clean_architecture_network_local
+
+    redis:
+        image: redis:7.2
+        command: redis-server
+        env_file:
+            - env/local.redis.env
+        ports:
+            - '6379:6379'
+        volumes:
+            - redis_data_local:/data
+        networks:
+            - typescript_nestjs_clean_architecture_network_local
+
+volumes:
+    pg_data_local:
+    redis_data_local:
+
+networks:
+    typescript_nestjs_clean_architecture_network_local:
+        driver: bridge
